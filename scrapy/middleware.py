@@ -1,3 +1,4 @@
+import time
 from collections import defaultdict
 import logging
 import pprint
@@ -77,6 +78,9 @@ class MiddlewareManager(object):
             self.methods[eb_methodname], obj, *args)
 
     def open_spider(self, spider):
+        while spider is None:
+            time.sleep(0.2)
+
         return self._process_chain('open_spider', spider)
 
     def close_spider(self, spider):
